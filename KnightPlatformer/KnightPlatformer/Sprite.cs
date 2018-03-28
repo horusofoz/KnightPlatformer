@@ -7,6 +7,7 @@ namespace KnightPlatformer
     class Sprite
     {
         public Vector2 position = Vector2.Zero;
+        public Vector2 velocity = Vector2.Zero;
         public Vector2 offset = Vector2.Zero;
 
         Texture2D texture;
