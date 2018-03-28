@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>H:/MonoGame/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/Level1.tmx</SourceFile>
+  <SourceTime>2018-03-28T16:32:36.7654423+10:30</SourceTime>
+  <DestFile>H:/MonoGame/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/bin/Windows/Level1.xnb</DestFile>
+  <DestTime>2018-03-28T16:32:47.3521716+10:30</DestTime>
+  <Importer>TiledMapImporter</Importer>
+  <ImporterTime>2017-12-11T04:41:22+10:30</ImporterTime>
+  <Processor>TiledMapProcessor</Processor>
+  <ProcessorTime>2017-12-11T04:41:22+10:30</ProcessorTime>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

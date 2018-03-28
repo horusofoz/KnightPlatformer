@@ -24,3 +24,14 @@ H:\MonoGame\KnightPlatformer\KnightPlatformer\KnightPlatformer\obj\x86\Debug\Kni
 H:\MonoGame\KnightPlatformer\KnightPlatformer\KnightPlatformer\obj\x86\Debug\KnightPlatformer.csproj.CoreCompileInputs.cache
 H:\MonoGame\KnightPlatformer\KnightPlatformer\KnightPlatformer\obj\x86\Debug\KnightPlatformer.exe
 H:\MonoGame\KnightPlatformer\KnightPlatformer\KnightPlatformer\obj\x86\Debug\KnightPlatformer.pdb
+H:\MonoGame\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\MonoGame.Extended.dll
+H:\MonoGame\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\MonoGame.Extended.Graphics.dll
+H:\MonoGame\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\MonoGame.Extended.Tiled.dll
+H:\MonoGame\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Newtonsoft.Json.dll
+H:\MonoGame\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\MonoGame.Extended.pdb
+H:\MonoGame\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\MonoGame.Extended.Graphics.pdb
+H:\MonoGame\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\MonoGame.Extended.Tiled.pdb
+H:\MonoGame\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Newtonsoft.Json.xml
+H:\MonoGame\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\Tileset.png
+H:\MonoGame\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\Level1.xnb
+H:\MonoGame\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\Tileset.xnb

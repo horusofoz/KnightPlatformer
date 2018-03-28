@@ -6,5 +6,7 @@
   <SourceFiles>
     <File>H:/MonoGame/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/Arial.spritefont</File>
     <File>H:/MonoGame/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/hero.png</File>
+    <File>H:/MonoGame/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/Level1.tmx</File>
+    <File>H:/MonoGame/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/Tileset.png</File>
   </SourceFiles>
 </SourceFileCollection>
