@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
@@ -21,6 +22,15 @@ namespace KnightPlatformer
         Camera2D camera = null;
         TiledMap map = null;
         TiledMapRenderer mapRenderer = null;
+        TiledMapLayer collisionLayer;
+        public ArrayList allCollisionTiles = new ArrayList();
+        private Sprite[,] levelGrid = new Sprite[20,15];
+
+        public int tileHeight = 0;
+        public int levelTileWidth = 0;
+        public int levelTileHeight = 0;
+
+
 
         public Game1()
         {
@@ -68,6 +78,57 @@ namespace KnightPlatformer
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+        }
+
+        public void SetUpTiles()
+        {
+            tileHeight = map.TileHeight;
+            levelTileHeight = map.Height;
+            levelTileWidth = map.Width;
+            levelGrid = new Sprite[levelTileWidth, levelTileHeight];
+
+            foreach (TiledMapLayer layer in map.TileLayers)
+            {
+                if(layer.Name == "Collision")
+                {
+                    collisionLayer = layer;
+                }
+            }
+
+            int columns = 0;
+            int rows = 0;
+            int count = 0;
+
+            while(count < collisionLayer.Tiles.Count)
+            {
+                if(collisionLayer.Tiles[count].GlobalIdentifier != 0)
+                {
+                    Sprite tileSprite = new Sprite();
+                    tileSprite.position.X = columns * tileHeight;
+                    tileSprite.position.Y = rows * tileHeight;
+
+                    tileSprite.tileCoordinates = new Vector2(columns, rows);
+                    tileSprite.width = tileHeight;
+                    tileSprite.height = tileHeight;
+
+                    tileSprite.UpdateHitBox();
+
+                    allCollisionTiles.Add(tileSprite);
+                    levelGrid[columns, rows] = tileSprite;
+                }
+
+                columns++;
+
+                if (columns == levelTileWidth)
+                {
+                    columns = 0;
+                    rows++;
+                }
+
+                count++;
+
+            }
+        }
         }
 
         /// <summary>
