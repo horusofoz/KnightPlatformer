@@ -10,6 +10,7 @@ namespace KnightPlatformer
         public Sprite playerSprite = new Sprite();
 
         Game1 game = null;
+        Collision collision = new Collision();
         float runSpeed = 15000;
 
         public Player()
@@ -30,6 +31,7 @@ namespace KnightPlatformer
         {
             UpdateInput(deltaTime);
             playerSprite.Update(deltaTime);
+            playerSprite.UpdateHitBox();
         }
 
         private void UpdateInput(float deltaTime)
@@ -51,6 +53,15 @@ namespace KnightPlatformer
             if (Keyboard.GetState().IsKeyDown(Keys.Down) == true)
             {
                 localAcceleration.Y = runSpeed;
+            }
+
+            foreach (Sprite tile in game.allCollisionTiles)
+            {
+                collision.game = game;
+                if (collision.IsColliding(playerSprite, tile) == true)
+                {
+                    int testVariable = 0;
+                }
             }
 
             playerSprite.velocity = localAcceleration * deltaTime;
