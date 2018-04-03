@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>H:/MonoGame/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/Arial.spritefont</SourceFile>
-  <SourceTime>2016-03-16T12:48:04+10:30</SourceTime>
-  <DestFile>H:/MonoGame/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/bin/Windows/Arial.xnb</DestFile>
-  <DestTime>2018-03-28T15:24:03.7496986+10:30</DestTime>
+  <SourceFile>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/Arial.spritefont</SourceFile>
+  <SourceTime>2018-04-03T17:33:46.5821935+09:30</SourceTime>
+  <DestFile>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/bin/Windows/Arial.xnb</DestFile>
+  <DestTime>2018-04-03T17:38:46.9357115+09:30</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2017-03-02T01:35:36+10:30</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

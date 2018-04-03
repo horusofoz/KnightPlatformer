@@ -19,7 +19,7 @@ namespace KnightPlatformer
 
         public void Load(ContentManager content, Game1 theGame)
         {
-            playerSprite.Load(content, "hero");
+            playerSprite.Load(content, "hero", true);
 
             game = theGame;
 
@@ -55,17 +55,11 @@ namespace KnightPlatformer
                 localAcceleration.Y = runSpeed;
             }
 
-            foreach (Sprite tile in game.allCollisionTiles)
-            {
-                collision.game = game;
-                if (collision.IsColliding(playerSprite, tile) == true)
-                {
-                    int testVariable = 0;
-                }
-            }
-
             playerSprite.velocity = localAcceleration * deltaTime;
             playerSprite.position += playerSprite.velocity * deltaTime;
+
+            collision.game = game;
+            playerSprite = collision.CollidewithPlatforms(playerSprite, deltaTime);
         }
 
 
