@@ -19,6 +19,15 @@ namespace KnightPlatformer
 
         Player player = new Player();
 
+        SpriteFont lucidaFont;
+        Texture2D heart = null;
+        Texture2D coin = null;
+        Texture2D trophy = null;
+        int score = 0;
+        int lives = 3;
+        int coins = 0;
+        Color scoreColor = new Color(19, 193, 19);
+
         Camera2D camera = null;
         TiledMap map = null;
         TiledMapRenderer mapRenderer = null;
@@ -60,6 +69,11 @@ namespace KnightPlatformer
 
             // TODO: use this.Content to load your game content here
             player.Load(Content, this);
+
+            lucidaFont = Content.Load<SpriteFont>("fonts/Lucida");
+            heart = Content.Load<Texture2D>("sprites/heart");
+            coin = Content.Load<Texture2D>("sprites/coin");
+            trophy = Content.Load<Texture2D>("sprites/trophy");
 
             var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
             camera = new Camera2D(viewportAdapter);
@@ -164,6 +178,20 @@ namespace KnightPlatformer
             spriteBatch.Begin(transformMatrix: viewMatrix);
             mapRenderer.Draw(map, ref viewMatrix, ref projectionMatrix);
             player.Draw(spriteBatch);
+
+            // draw all the GUI components in a separate SpritebatchBatch  section
+            // Coins
+            spriteBatch.DrawString(lucidaFont, coins.ToString("00"), new Vector2(150, 20), Color.Gold);
+            spriteBatch.Draw(coin, new Vector2(110, 20));
+
+            // Lives
+            spriteBatch.Draw(heart, new Vector2(20, 20));
+            spriteBatch.DrawString(lucidaFont, lives.ToString("00"), new Vector2(60, 20), Color.Red);
+
+            // Score
+            spriteBatch.Draw(trophy, new Vector2(200, 20));
+            spriteBatch.DrawString(lucidaFont, score.ToString("00000"), new Vector2(250, 20), scoreColor);
+
             spriteBatch.End();
 
             base.Draw(gameTime);

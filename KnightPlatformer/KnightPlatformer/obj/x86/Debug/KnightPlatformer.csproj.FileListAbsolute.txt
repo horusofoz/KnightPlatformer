@@ -36,8 +36,6 @@ H:\MonoGame\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\D
 H:\MonoGame\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\Level1.xnb
 H:\MonoGame\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\Tileset.xnb
 C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\Tileset.png
-C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\Arial.xnb
-C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\hero.xnb
 C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\Level1.xnb
 C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\Tileset.xnb
 C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\KnightPlatformer.exe
@@ -72,3 +70,11 @@ C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\ob
 C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\obj\x86\Debug\KnightPlatformer.csproj.CoreCompileInputs.cache
 C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\obj\x86\Debug\KnightPlatformer.exe
 C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\obj\x86\Debug\KnightPlatformer.pdb
+C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\walk.xnb
+C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\sprites\chest.xnb
+C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\sprites\coin.xnb
+C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\sprites\heart.xnb
+C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\sprites\trophy.xnb
+C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\sprites\walk.xnb
+C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\sprites\zombieWalk.xnb
+C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\fonts\Lucida.xnb

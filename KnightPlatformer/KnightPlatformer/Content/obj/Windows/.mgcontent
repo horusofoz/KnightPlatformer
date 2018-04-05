@@ -4,9 +4,14 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/Arial.spritefont</File>
-    <File>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/hero.png</File>
     <File>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/Level1.tmx</File>
     <File>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/Tileset.png</File>
+    <File>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/sprites/chest.png</File>
+    <File>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/sprites/coin.png</File>
+    <File>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/sprites/heart.png</File>
+    <File>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/sprites/trophy.png</File>
+    <File>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/sprites/walk.png</File>
+    <File>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/sprites/zombieWalk.png</File>
+    <File>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/fonts/Lucida.spritefont</File>
   </SourceFiles>
 </SourceFileCollection>

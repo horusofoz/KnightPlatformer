@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace KnightPlatformer
 {
@@ -8,11 +9,15 @@ namespace KnightPlatformer
     {
         public Vector2 position = Vector2.Zero;
         public Vector2 velocity = Vector2.Zero;
-        //public Vector2 offset = Vector2.Zero;
-
+        public Vector2 offset = Vector2.Zero;
+        public Vector2 tileCoordinates = Vector2.Zero;
         Texture2D texture;
 
-        public Vector2 tileCoordinates = Vector2.Zero;
+        List<AnimatedTexture> animations = new List<AnimatedTexture>();
+        List<Vector2> animationOffsets = new List<Vector2>();
+        int currentAnimation = 0;
+
+        SpriteEffects effects = SpriteEffects.None;
 
         public int width = 0;
         public int height = 0;
@@ -21,8 +26,6 @@ namespace KnightPlatformer
         public int rightEdge = 0;
         public int topEdge = 0;
         public int bottomEdge = 0;
-
-        public Vector2 offset;
 
         public Sprite()
         {
@@ -45,6 +48,7 @@ namespace KnightPlatformer
 
         public void Update(float deltaTime)
         {
+            animations[currentAnimation].UpdateFrame(deltaTime);
         }
 
         public void UpdateHitBox()
@@ -57,7 +61,37 @@ namespace KnightPlatformer
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position - offset, Color.White);
+            animations[currentAnimation].DrawFrame(spriteBatch, position + animationOffsets[currentAnimation], effects);
         }
+
+        public void SetFlipped(bool state)
+        {
+            if(state == true)
+            {
+                effects = SpriteEffects.FlipHorizontally;
+            }
+            else
+            {
+                effects = SpriteEffects.None;
+            }
+        }
+
+        public void Pause()
+        {
+            animations[currentAnimation].Pause();
+        }
+
+        public void Play()
+        {
+            animations[currentAnimation].Play();
+        }
+
+        public void Add(AnimatedTexture animation, int xOffset = 0, int yOffset = 0)
+        {
+            animations.Add(animation);
+            animationOffsets.Add(new Vector2(xOffset, yOffset));
+        }
+
+
     }
 }

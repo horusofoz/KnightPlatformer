@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/hero.png</SourceFile>
-  <SourceTime>2018-04-03T17:33:46.5971365+09:30</SourceTime>
-  <DestFile>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/bin/Windows/hero.xnb</DestFile>
-  <DestTime>2018-04-03T17:38:47.0435711+09:30</DestTime>
+  <SourceFile>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/sprites/walk.png</SourceFile>
+  <SourceTime>2018-04-03T19:37:43.8009504+09:30</SourceTime>
+  <DestFile>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/bin/Windows/sprites/walk.xnb</DestFile>
+  <DestTime>2018-04-05T18:31:44.7739692+09:30</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-02T01:35:36+10:30</ImporterTime>
   <Processor>TextureProcessor</Processor>

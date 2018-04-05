@@ -19,7 +19,9 @@ namespace KnightPlatformer
 
         public void Load(ContentManager content, Game1 theGame)
         {
-            playerSprite.Load(content, "hero", true);
+            AnimatedTexture animation = new AnimatedTexture(Vector2.Zero, 0, 1, 1);
+            animation.Load(content, "sprites/walk", 12, 20);
+            playerSprite.Add(animation, 0, -5);
 
             game = theGame;
 
@@ -41,10 +43,14 @@ namespace KnightPlatformer
             if(Keyboard.GetState().IsKeyDown(Keys.Left) == true)
             {
                 localAcceleration.X = -runSpeed;
+                playerSprite.SetFlipped(true);
+                playerSprite.Play();
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Right) == true)
             {
                 localAcceleration.X = runSpeed;
+                playerSprite.SetFlipped(false);
+                playerSprite.Play();
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Up) == true)
             {
@@ -53,6 +59,10 @@ namespace KnightPlatformer
             if (Keyboard.GetState().IsKeyDown(Keys.Down) == true)
             {
                 localAcceleration.Y = runSpeed;
+            }
+            if (Keyboard.GetState().IsKeyUp(Keys.Left) == true && Keyboard.GetState().IsKeyUp(Keys.Right) == true)
+            {
+                playerSprite.Pause();
             }
 
             playerSprite.velocity = localAcceleration * deltaTime;
