@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/sounds/Jump.wav</SourceFile>
+  <SourceTime>2018-04-10T17:59:51.4030443+09:30</SourceTime>
+  <DestFile>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/bin/Windows/sounds/Jump.xnb</DestFile>
+  <DestTime>2018-04-10T19:47:03.818166+09:30</DestTime>
+  <Importer>WavImporter</Importer>
+  <ImporterTime>2017-03-02T01:35:36+10:30</ImporterTime>
+  <Processor>SoundEffectProcessor</Processor>
+  <ProcessorTime>2017-03-02T01:35:36+10:30</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

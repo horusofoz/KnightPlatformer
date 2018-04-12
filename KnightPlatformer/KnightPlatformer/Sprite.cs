@@ -11,7 +11,7 @@ namespace KnightPlatformer
         public Vector2 velocity = Vector2.Zero;
         public Vector2 offset = Vector2.Zero;
         public Vector2 tileCoordinates = Vector2.Zero;
-        Texture2D texture;
+        public Texture2D texture;
 
         List<AnimatedTexture> animations = new List<AnimatedTexture>();
         List<Vector2> animationOffsets = new List<Vector2>();
@@ -26,6 +26,8 @@ namespace KnightPlatformer
         public int rightEdge = 0;
         public int topEdge = 0;
         public int bottomEdge = 0;
+
+        public bool canJump = false;
 
         public Sprite()
         {
@@ -61,7 +63,14 @@ namespace KnightPlatformer
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            animations[currentAnimation].DrawFrame(spriteBatch, position + animationOffsets[currentAnimation], effects);
+            if(animations.Count > 0)
+            {
+                animations[currentAnimation].DrawFrame(spriteBatch, position + animationOffsets[currentAnimation], effects);
+            }
+            else if(texture != null)
+            {
+                spriteBatch.Draw(texture, position - offset, Color.White);
+            }
         }
 
         public void SetFlipped(bool state)

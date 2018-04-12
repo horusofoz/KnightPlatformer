@@ -76,5 +76,9 @@ C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bi
 C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\sprites\heart.xnb
 C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\sprites\trophy.xnb
 C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\sprites\walk.xnb
-C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\sprites\zombieWalk.xnb
 C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\fonts\Lucida.xnb
+C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\sounds\Jump.xnb
+C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\sprites\hero.xnb
+C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\sounds\harp.wma
+C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\sounds\harp.xnb
+C:\Users\s181122\Documents\KnightPlatformer\KnightPlatformer\KnightPlatformer\bin\Windows\x86\Debug\Content\sprites\zombie.xnb

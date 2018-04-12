@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -6,6 +7,8 @@ using MonoGame.Extended;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Graphics;
 using MonoGame.Extended.ViewportAdapters;
+using Microsoft.Xna.Framework.Media;
+using System.Collections.Generic;
 
 namespace KnightPlatformer
 {
@@ -17,27 +20,34 @@ namespace KnightPlatformer
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Player player = new Player();
+        public Player player = new Player();
+
+        Song gameMusic;
 
         SpriteFont lucidaFont;
         Texture2D heart = null;
         Texture2D coin = null;
-        Texture2D trophy = null;
-        int score = 0;
-        int lives = 3;
-        int coins = 0;
-        Color scoreColor = new Color(19, 193, 19);
+        public int lives = 3;
+        public int coins = 0;
 
         Camera2D camera = null;
         TiledMap map = null;
         TiledMapRenderer mapRenderer = null;
         TiledMapTileLayer collisionLayer;
+        TiledMapTileLayer spikesLayer;
         public ArrayList allCollisionTiles = new ArrayList();
+        public ArrayList allSpikeTiles = new ArrayList();
         public Sprite[,] levelGrid;
+        public Spikes[,]  spikesLevelGrid;
 
         public int tileHeight = 0;
         public int levelTileWidth = 0;
         public int levelTileHeight = 0;
+
+        public List<Enemy> enemies = new List<Enemy>();
+        public Chest goal = null;
+
+        public Vector2 gravity = new Vector2(0, 1500);
 
         public Game1()
         {
@@ -73,7 +83,6 @@ namespace KnightPlatformer
             lucidaFont = Content.Load<SpriteFont>("fonts/Lucida");
             heart = Content.Load<Texture2D>("sprites/heart");
             coin = Content.Load<Texture2D>("sprites/coin");
-            trophy = Content.Load<Texture2D>("sprites/trophy");
 
             var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
             camera = new Camera2D(viewportAdapter);
@@ -83,6 +92,10 @@ namespace KnightPlatformer
             mapRenderer = new TiledMapRenderer(GraphicsDevice);
 
             SetUpTiles();
+            LoadObjects();
+
+            gameMusic = Content.Load<Song>("sounds/harp");
+            MediaPlayer.Play(gameMusic);
         }
 
         /// <summary>
@@ -100,12 +113,18 @@ namespace KnightPlatformer
             levelTileHeight = map.Height;
             levelTileWidth = map.Width;
             levelGrid = new Sprite[levelTileWidth, levelTileHeight];
+            spikesLevelGrid= new Spikes[levelTileWidth, levelTileHeight];
 
-            foreach(TiledMapTileLayer layer in map.TileLayers)
+            foreach (TiledMapTileLayer layer in map.TileLayers)
             {
                 if(layer.Name == "Collision")
                 {
                     collisionLayer = layer;
+                }
+
+                if (layer.Name == "Spikes")
+                {
+                    spikesLayer = layer;
                 }
             }
 
@@ -128,11 +147,47 @@ namespace KnightPlatformer
 
                     allCollisionTiles.Add(tileSprite);
                     levelGrid[columns, rows] = tileSprite;
+
+                    Console.WriteLine(player.playerSprite.position);
                 }
 
                 columns++;
 
                 if(columns == levelTileWidth)
+                {
+                    columns = 0;
+                    rows++;
+                }
+
+                loopCount++;
+            }
+
+            columns = 0;
+            rows = 0;
+            loopCount = 0;
+            while (loopCount < spikesLayer.Tiles.Count)
+            {
+                if (spikesLayer.Tiles[loopCount].GlobalIdentifier != 0)
+                {
+                    Spikes spike = new Spikes();
+                    spike.spikeSprite.position.X = columns * tileHeight;
+                    spike.spikeSprite.position.Y = rows * tileHeight;
+                    spike.spikeSprite.tileCoordinates = new Vector2(columns, rows);
+
+                    spike.Load(Content, this);
+
+                    spike.spikeSprite.width = spike.spikeSprite.texture.Bounds.Width;
+                    spike.spikeSprite.height = spike.spikeSprite.texture.Bounds.Height;
+
+                    spike.spikeSprite.UpdateHitBox();
+
+                    allSpikeTiles.Add(spike);
+                    //spikesLevelGrid[columns, rows] = spike;
+                }
+
+                columns++;
+
+                if (columns == levelTileWidth)
                 {
                     columns = 0;
                     rows++;
@@ -154,7 +209,21 @@ namespace KnightPlatformer
 
             // TODO: Add your update logic here
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            foreach (Enemy enemy in enemies)
+            {
+                enemy.Update(deltaTime);
+            }
+
             player.Update(deltaTime);
+
+            if(allSpikeTiles.Count > 0)
+            {
+                foreach (Spikes spike in allSpikeTiles)
+                {
+                    spike.Update(deltaTime);
+                }
+            }            
 
             camera.Position = player.playerSprite.position - new
                 Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
@@ -179,22 +248,56 @@ namespace KnightPlatformer
             mapRenderer.Draw(map, ref viewMatrix, ref projectionMatrix);
             player.Draw(spriteBatch);
 
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            goal.Draw(spriteBatch);
+
+            foreach (Enemy enemy in enemies)
+            {
+                enemy.Draw(spriteBatch);
+            }
+            
             // draw all the GUI components in a separate SpritebatchBatch  section
-            // Coins
-            spriteBatch.DrawString(lucidaFont, coins.ToString("00"), new Vector2(150, 20), Color.Gold);
-            spriteBatch.Draw(coin, new Vector2(110, 20));
-
             // Lives
-            spriteBatch.Draw(heart, new Vector2(20, 20));
-            spriteBatch.DrawString(lucidaFont, lives.ToString("00"), new Vector2(60, 20), Color.Red);
+            spriteBatch.Draw(heart, new Vector2(player.playerSprite.position.X - 390, player.playerSprite.position.Y - 235));
+            spriteBatch.DrawString(lucidaFont, lives.ToString("00"), new Vector2(player.playerSprite.position.X - 350, player.playerSprite.position.Y - 230), Color.Red);
 
-            // Score
-            spriteBatch.Draw(trophy, new Vector2(200, 20));
-            spriteBatch.DrawString(lucidaFont, score.ToString("00000"), new Vector2(250, 20), scoreColor);
+            // Coins
+            spriteBatch.DrawString(lucidaFont, coins.ToString("00"), new Vector2(player.playerSprite.position.X - 280, player.playerSprite.position.Y - 230), Color.Gold);
+            spriteBatch.Draw(coin, new Vector2(player.playerSprite.position.X - 320, player.playerSprite.position.Y - 235));
 
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        void LoadObjects()
+        {
+            foreach(TiledMapObjectLayer layer in map.ObjectLayers)
+            {
+                if(layer.Name == "Enemies")
+                {
+                    foreach(TiledMapObject thing in layer.Objects)
+                    {
+                        Enemy enemy = new Enemy();
+                        enemy.enemySprite.position = new Vector2(thing.Position.X, thing.Position.Y);
+                        enemy.Load(Content, this);
+                        enemies.Add(enemy);
+                    }
+                    
+                }
+                if(layer.Name == "Goal")
+                {
+                    TiledMapObject thing = layer.Objects[0];
+                    if(thing != null)
+                    {
+                        Chest chest = new Chest();
+                        chest.chestSprite.position = new Vector2(thing.Position.X, thing.Position.Y);
+                        chest.Load(Content, this);
+                        goal = chest;
+                    }
+                }
+            }
         }
     }
 }

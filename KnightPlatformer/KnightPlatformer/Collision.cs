@@ -23,7 +23,7 @@ namespace KnightPlatformer
             return true;
         }
 
-        public Sprite CollidewithPlatforms(Sprite hero, float deltaTime)
+        public Sprite CollideWithPlatforms(Sprite hero, float deltaTime)
         {
             // Create a copy of the hero that will move to where the hero will be next frame, to PREDICT if the hero will overlap an obstacle
             Sprite playerPrediction = new Sprite();
@@ -126,7 +126,7 @@ namespace KnightPlatformer
         {
             Sprite tile = game.levelGrid[(int)tileIndex.X, (int)tileIndex.Y];
 
-            if(IsColliding(playerPrediction, tile) == true)
+            if(IsColliding(playerPrediction, tile) == true && hero.velocity.X < 0)
             {
                 hero.position.X = tile.rightEdge + hero.offset.X;
                 hero.velocity.X = 0;
@@ -139,7 +139,7 @@ namespace KnightPlatformer
         {
             Sprite tile = game.levelGrid[(int)tileIndex.X, (int)tileIndex.Y];
 
-            if(IsColliding(playerPrediction, tile) == true)
+            if(IsColliding(playerPrediction, tile) == true && hero.velocity.X > 0)
             {
                 hero.position.X = tile.leftEdge - hero.offset.X;
                 hero.velocity.X = 0;
@@ -152,7 +152,7 @@ namespace KnightPlatformer
         {
             Sprite tile = game.levelGrid[(int)tileIndex.X, (int)tileIndex.Y];
 
-            if (IsColliding(playerPrediction, tile) == true)
+            if (IsColliding(playerPrediction, tile) == true && hero.velocity.Y < 0)
             {
                 hero.position.Y = tile.bottomEdge + hero.offset.Y;
                 hero.velocity.Y = 0;
@@ -165,10 +165,11 @@ namespace KnightPlatformer
         {
             Sprite tile = game.levelGrid[(int)tileIndex.X, (int)tileIndex.Y];
 
-            if(IsColliding(playerPrediction, tile) == true)
+            if(IsColliding(playerPrediction, tile) == true && hero.velocity.Y > 0)
             {
                 hero.position.Y = tile.topEdge - hero.offset.Y;
                 hero.velocity.Y = 0;
+                hero.canJump = true;
             }
 
             return hero;
@@ -187,19 +188,17 @@ namespace KnightPlatformer
                 {
                     // If top edge closest, collision is happening above the platform
                     hero.position.Y = tile.topEdge - hero.offset.Y;
-                    hero.velocity.Y = 0;
+                    hero.canJump = true;
                 }
                 else if(rightEdgeDistance < leftEdgeDistance)
                 {
                     // if right edge closest, collision is happening to the right of the platform
                     hero.position.X = tile.rightEdge + hero.offset.X;
-                    hero.velocity.X = 0;
                 }
                 else
                 {
                     // else if left edge closest, collision happening left of the platform
                     hero.position.X = tile.leftEdge - hero.offset.X;
-                    hero.velocity.X = 0;
                 }
             }
 
@@ -219,23 +218,56 @@ namespace KnightPlatformer
                 {
                     // If top edge closest and overlapping on top edge
                     hero.position.Y = tile.topEdge - hero.offset.Y;
-                    hero.velocity.Y = 0;
                 }
                 else if (rightEdgeDistance < leftEdgeDistance)
                 {
                     // else if the left edge closes and overlapping on left edge
                     hero.position.X = tile.rightEdge + hero.offset.X;
-                    hero.velocity.X = 0;
                 }
                 else
                 {
                     // else if right edge closest and overlapping on the right edge
                     hero.position.X = tile.leftEdge - hero.offset.X;
-                    hero.velocity.X = 0;
                 }
             }
 
             return hero;
+        }
+
+        public Sprite CollideWithMonster(Player hero, Enemy monster, float deltaTime, Game1 theGame)
+        {
+            Sprite playerPrediction = new Sprite();
+            playerPrediction.position = hero.playerSprite.position;
+            playerPrediction.width = hero.playerSprite.width;
+            playerPrediction.height = hero.playerSprite.height;
+            playerPrediction.offset = hero.playerSprite.offset;
+            playerPrediction.UpdateHitBox();
+
+            playerPrediction.position += hero.playerSprite.velocity * deltaTime;
+
+            // If ther eis a collission
+            if(IsColliding(hero.playerSprite, monster.enemySprite))
+            {
+                int leftEdgeDistance = Math.Abs(monster.enemySprite.leftEdge - playerPrediction.rightEdge);
+                int rightEdgeDistance = Math.Abs(monster.enemySprite.rightEdge - playerPrediction.leftEdge);
+                int topEdgeDistance = Math.Abs(monster.enemySprite.topEdge - playerPrediction.bottomEdge);
+                int bottomEdgeDistance = Math.Abs(monster.enemySprite.bottomEdge - playerPrediction.topEdge);
+
+                // Check which edge of the monster sprite is closest
+
+            if(topEdgeDistance < leftEdgeDistance && topEdgeDistance < rightEdgeDistance && topEdgeDistance < bottomEdgeDistance)
+                {
+                    theGame.enemies.Remove(monster);
+                    hero.playerSprite.velocity.Y -= hero.jumpStrength * deltaTime;
+                    hero.playerSprite.canJump = false;
+                    theGame.coins++;
+                }
+                else
+                {
+                    theGame.Exit();
+                }
+            }
+            return hero.playerSprite;
         }
     }
 }

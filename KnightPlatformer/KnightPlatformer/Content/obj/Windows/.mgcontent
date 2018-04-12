@@ -11,7 +11,10 @@
     <File>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/sprites/heart.png</File>
     <File>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/sprites/trophy.png</File>
     <File>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/sprites/walk.png</File>
-    <File>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/sprites/zombieWalk.png</File>
     <File>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/fonts/Lucida.spritefont</File>
+    <File>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/sounds/Jump.wav</File>
+    <File>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/sprites/hero.png</File>
+    <File>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/sounds/harp.mp3</File>
+    <File>C:/Users/s181122/Documents/KnightPlatformer/KnightPlatformer/KnightPlatformer/Content/sprites/zombie.png</File>
   </SourceFiles>
 </SourceFileCollection>

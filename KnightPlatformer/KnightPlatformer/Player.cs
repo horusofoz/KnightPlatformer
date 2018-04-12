@@ -1,17 +1,25 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace KnightPlatformer
 {
-    class Player
+    public class Player
     {
         public Sprite playerSprite = new Sprite();
 
         Game1 game = null;
         Collision collision = new Collision();
-        float runSpeed = 15000;
+        float runSpeed = 250;
+        float maxRunSpeed = 500;
+        float friction = 500;
+        float terminalVelocity = 500;
+        public float jumpStrength = 50000;
+
+        SoundEffect jumpSound;
+        SoundEffectInstance jumpSoundInstance;
 
         public Player()
         {
@@ -19,8 +27,14 @@ namespace KnightPlatformer
 
         public void Load(ContentManager content, Game1 theGame)
         {
-            AnimatedTexture animation = new AnimatedTexture(Vector2.Zero, 0, 1, 1);
+            playerSprite.Load(content, "sprites/hero", true);
+            AnimatedTexture animation = new AnimatedTexture(playerSprite.offset, 0, 1, 1);
+
             animation.Load(content, "sprites/walk", 12, 20);
+
+            jumpSound = content.Load<SoundEffect>("sounds/Jump");
+            jumpSoundInstance = jumpSound.CreateInstance();
+
             playerSprite.Add(animation, 0, -5);
 
             game = theGame;
@@ -34,44 +48,83 @@ namespace KnightPlatformer
             UpdateInput(deltaTime);
             playerSprite.Update(deltaTime);
             playerSprite.UpdateHitBox();
+
+            if (collision.IsColliding(playerSprite, game.goal.chestSprite))
+            {
+                game.Exit();
+            }
+
+            for(int i = 0; i < game.enemies.Count; i++)
+            {
+                playerSprite = collision.CollideWithMonster(this, game.enemies[i], deltaTime, game);
+            }
         }
 
         private void UpdateInput(float deltaTime)
         {
-            Vector2 localAcceleration = new Vector2(0, 0);
+            bool wasMovingLeft = playerSprite.velocity.X < 0;
+            bool wasMovingRight = playerSprite.velocity.X > 0;
+
+            Vector2 localAcceleration = game.gravity;
 
             if(Keyboard.GetState().IsKeyDown(Keys.Left) == true)
             {
-                localAcceleration.X = -runSpeed;
+                localAcceleration.X += -runSpeed;
                 playerSprite.SetFlipped(true);
                 playerSprite.Play();
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Right) == true)
+            else if(wasMovingLeft == true)
             {
-                localAcceleration.X = runSpeed;
-                playerSprite.SetFlipped(false);
-                playerSprite.Play();
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Up) == true)
-            {
-                localAcceleration.Y = -runSpeed;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Down) == true)
-            {
-                localAcceleration.Y = runSpeed;
-            }
-            if (Keyboard.GetState().IsKeyUp(Keys.Left) == true && Keyboard.GetState().IsKeyUp(Keys.Right) == true)
-            {
+                localAcceleration.X += friction;
                 playerSprite.Pause();
             }
 
-            playerSprite.velocity = localAcceleration * deltaTime;
+            if (Keyboard.GetState().IsKeyDown(Keys.Right) == true)
+            {
+                localAcceleration.X += runSpeed;
+                playerSprite.SetFlipped(false);
+                playerSprite.Play();
+            }
+            else if (wasMovingRight == true)
+            {
+                localAcceleration.X += -friction;
+                playerSprite.Pause();
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) == true && playerSprite.canJump == true)
+            {
+                playerSprite.canJump = false;
+                localAcceleration.Y -= jumpStrength;
+                jumpSoundInstance.Play();
+            }
+
+            playerSprite.velocity += localAcceleration * deltaTime;
+
+            if (playerSprite.velocity.X > maxRunSpeed)
+            {
+                playerSprite.velocity.X = maxRunSpeed;
+            }
+            else if (playerSprite.velocity.X < -maxRunSpeed)
+            {
+                playerSprite.velocity.X = -maxRunSpeed;
+            }
+
+            if (wasMovingLeft && (playerSprite.velocity.X > 0) || wasMovingRight && (playerSprite.velocity.X < 0))
+            {
+                // clamp at zero to prevent friction from making us slide
+                playerSprite.velocity.X = 0;
+            }
+
+            if (playerSprite.velocity.Y > terminalVelocity)
+            {
+                playerSprite.velocity.Y = terminalVelocity;
+            }
+
             playerSprite.position += playerSprite.velocity * deltaTime;
-
+            
             collision.game = game;
-            playerSprite = collision.CollidewithPlatforms(playerSprite, deltaTime);
+            playerSprite = collision.CollideWithPlatforms(playerSprite, deltaTime);
         }
-
 
         public void Draw(SpriteBatch spriteBatch)
         {
