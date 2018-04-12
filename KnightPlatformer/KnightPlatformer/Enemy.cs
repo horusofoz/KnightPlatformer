@@ -27,7 +27,7 @@ namespace KnightPlatformer
             enemySprite.position += enemySprite.velocity * deltaTime;
             // check for collisions
             collision.game = game;
-            //enemySprite = collision.CollideWithPlatforms(enemySprite, deltaTime);
+            enemySprite = collision.CollideWithPlatforms(enemySprite, deltaTime);
 
             // if the enemy hits a wall, ie x velocity is 0, change direction
             if (enemySprite.velocity.X == 0)
